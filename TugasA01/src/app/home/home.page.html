@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Metric Converter</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <p class="sub-title">By: Chezkiel Rengkung (220211060134)</p>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-list>
+      <ion-item class="spaced-item">
+        <ion-label>Metrik</ion-label>
+        <ion-select aria-label="Metrik" interface="popover" placeholder="Pilih Metrik" (ionChange)="onMetricChange($event)">
+          <ion-select-option value="panjang">Panjang</ion-select-option>
+          <ion-select-option value="massa">Massa</ion-select-option>
+          <ion-select-option value="waktu">Waktu</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="spaced-item">
+        <ion-label>Dari</ion-label>
+        <ion-select aria-label="Dari" interface="popover" placeholder="--Pilih Satuan" [(ngModel)]="fromUnit" (ionChange)="convert()">
+          <ion-select-option *ngFor="let unit of availableUnits" [value]="unit.value">{{ unit.label }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item class="spaced-item">
+        <ion-label>Ke</ion-label>
+        <ion-select aria-label="Ke" interface="popover" placeholder="--Pilih Satuan" [(ngModel)]="toUnit" (ionChange)="convert()">
+          <ion-select-option *ngFor="let unit of availableUnits" [value]="unit.value">{{ unit.label }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item class="spaced-item">
+        <ion-label position="floating">Input</ion-label>
+        <ion-input type="number" [(ngModel)]="inputValue" (ionInput)="convert()"></ion-input>
+      </ion-item>
+
+      <ion-item class="spaced-item">
+        <ion-label position="stacked">Output</ion-label>
+        <ion-input type="number" [value]="outputValue" readonly></ion-input>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>
+
+<style>
+  .spaced-item {
+    margin-bottom: 16px;
+  }
+
+  .sub-title {
+    font-size: small;
+    color: gray;
+    text-align: center;
+    margin: 0;
+  }
+</style>
